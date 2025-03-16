@@ -1,0 +1,44 @@
+/* Size for brand */
+nav .navbar-brand
+{
+    font-size: xx-large;
+}
+
+/* Colors for brand */
+nav .navbar-brand .blue
+{
+    color: #2d5d83;
+}
+nav .navbar-brand .grey
+{
+    color: #8b888e;
+}
+
+table {
+    background-color: transparent;
+    margin-bottom: 1rem;
+    width: 50%;
+    margin: auto;
+}
+
+table th,
+table td {
+    padding: 0.75rem;
+    vertical-align: middle;
+}
+
+table th {
+    font-variant: small-caps;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #f5e6ff;
+}
+
+table, th, td {
+    border: 1px solid;
+}
+
+.deep {
+    background-color: #d699ff;
+}

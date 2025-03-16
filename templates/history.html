@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search history
+{% endblock %}
+
+{% block main %}
+{% if history != [] %}
+<h2>Search history</h2>
+    <table id="table">
+        <thead>
+            <tr class="deep">
+                <th>Name</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in history %}
+            <tr>
+                <td>{{ row["formattedaddress"] }}</td>
+                <td>{{ row["moment"] }}</td>
+                <td><form action="/search" method="post"><button class="btn btn-primary" name="search" value="{{ row['formattedaddress'] }}" type="submit">Search</button></form></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+<h2>Search history</h2>
+    <table id="table">
+        Your search history will be displayed here 
+    </table>
+{% endif %}
+
+{% endblock %}

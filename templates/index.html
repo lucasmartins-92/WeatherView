@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Weather View
+{% endblock %}
+
+{% block main %}
+
+    <div>
+        <h2>Hello, {{ user }}!</h2>
+        <hr>
+    </div>
+    <div>
+        <h2>Search location</h2>
+        <form action="/search" method="post">
+            <div class="mb-3">
+                <input id="search" autofocus class="search" name="search" placeholder="Insert ZIP, address..." type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <hr>
+        {% if session %}
+            {% if saved %}
+            <h2>Saved searches</h2>
+                <table id="table">
+                    <thead>
+                        <tr class="deep">
+                            <th>Name</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in saved %}
+                    <tr>
+                        <td>{{ row["savedname"] }}</td>
+                        <td><form action="/search" method="post"><button class="btn btn-primary" name="search" value="{{ row['formattedaddress'] }}" type="submit">Search</button></form></td>
+                        <td><form action="/removed" method="post"><button class="btn btn-primary" name="remove" value="{{ row['placehash'] }}" type="submit">Remove</button></form></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+            <h2>Saved searches</h2>
+                <table id="table">
+                    Saved searches will be displayed here 
+                </table>
+            {% endif %}
+        {% else %}
+            <h6><a href="/register">Create an account</a> to view search history and save favorite searches!</h6>
+        {% endif %}
+    </div>
+
+{% endblock %}

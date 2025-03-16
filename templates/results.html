@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Weather View
+{% endblock %}
+
+{% block main %}
+
+    <div>
+        <h2>Here's the weather in {{ formattedaddress }}</h2>
+        <hr>
+        <p style="font-size:140%;">{{ condition }}</p>
+        <p style="font-size:140%;">Temperature: {{ currenttemp }}°C</p>
+        <p style="font-size:140%;">H: {{ high }} L: {{ low }}</p>
+    </div>
+
+    {% if session %}
+        {% if issaved %}
+            <div>
+                <p style="font-size:160%;">Would you like to save this search?</p>
+                <form action="/saved" method="post">
+                    <input id="savename" autofocus class="save" name="save" placeholder="Name this place" type="text">
+                    <input type="hidden" name="formattedaddress" value="{{ formattedaddress }}">
+                    <button class="btn btn-primary" disabled id="savesearch" type="submit">Save</button>
+                </form>
+            </div>
+        {% endif %}
+    {% else %}
+        <p style="font-size:160%;"><a href="/register">Create an account</a> or <a href="/login">login</a> to view search history and save favorite searches!</p>
+    {% endif %}
+
+    <div>
+        <br>
+        <hr>
+        <h2>Search new location</h2>
+        <form action="/search" method="post">
+            <div class="mb-3">
+                <input id="search" autofocus class="search" name="search" placeholder="Insert ZIP, address..." type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Search</button>
+        </form>
+        <hr>
+    </div>
+
+    <script type="text/javascript">
+        let inputElt = document.getElementById('savename');
+        let btn = document.getElementById('savesearch');
+        inputElt.addEventListener("input", function(){
+            btn.disabled = !this.value;
+        })
+    </script>
+
+{% endblock %}
